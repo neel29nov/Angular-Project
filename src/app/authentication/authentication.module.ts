@@ -5,11 +5,13 @@ import { MainComponent } from './main/main.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { FormsModule }   from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
 @NgModule({
-  declarations: [LoginComponent, MainComponent, SignupComponent],
+  declarations: [LoginComponent, MainComponent, SignupComponent, ForgotPasswordComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

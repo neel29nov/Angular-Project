@@ -14,4 +14,7 @@ export class AuthService {
   Signup(data){
     return this.httpClient.post<any>(apiUrl.signupUrl, data);
   }
+  ForgotPassword(data){
+    return this.httpClient.post<any>(apiUrl.forgotPasswordUrl, data);
+  }
 }

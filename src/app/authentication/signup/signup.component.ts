@@ -21,10 +21,13 @@ export class SignupComponent implements OnInit {
   model = {
     email: '',
     password: '',
+    cpassword: '',
     name:'',
     phone:'',
     type:'1'
   }
+  passwordType="password";
+  cpasswordType="password";
   onSubmit(value) {
     this.service.Signup(value).subscribe(
       response => {
@@ -40,5 +43,9 @@ export class SignupComponent implements OnInit {
       error => {
         this.notifyService.showError(error.error.errorMessage, '');
       })
+  }
+  choose(event)
+  {
+    console.log(event);
   }
 }

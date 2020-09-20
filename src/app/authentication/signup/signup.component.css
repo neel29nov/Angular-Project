@@ -1,0 +1,31 @@
+
+.login-section .social-boxed a.google{
+	background-color:#DB4437;
+}
+.signup-section .inner-container .text {
+    margin-top: 5px!important;
+    margin-bottom: 20px!important;
+}
+.signup-section .inner-container{
+	max-width: 500px !important;
+	padding: 35px 35px 35px!important;
+}
+.login-section .social-boxed a{
+	margin-bottom: 0px!important;
+}
+.page-wrapper{
+	padding-left: 0px !important; 
+}
+.signup-tabs .tab-btns .tab-btn{
+	font-size: 14px !important;
+	padding: 15px 53px 14px !important;	
+}
+.alert-danger {
+	color: #d9534f !important;
+	background-color: transparent !important; 
+	border-color: transparent !important;
+ }
+ .alert {
+	 padding: 0rem 1.25rem !important;
+	 margin-bottom: 0px !important;
+ }
