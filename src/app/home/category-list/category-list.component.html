@@ -35,6 +35,13 @@
         </div>
         <div class="inner-container">
             <div class="container-content">
+                <input type="text" id="moduleText" (click)="myFunction()" class="mat-input-element">
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()">
+                            <a *ngFor="let list of moduleList; let i = index" href="javascript:void(0)"
+                            (click)="myFunction2(list.module_name)">{{list.module_name}}</a>
+                        </div>
+                
                 <mat-form-field class="example-form-field pull-right">
                     <mat-label>Search</mat-label>
                     <input (keyup.enter)="Search()" id="SearchText" matInput type="text">
@@ -45,11 +52,11 @@
                 <table class="table">
                   <thead>
                         <tr>
-                            <th>Title <i *ngIf="!sortArrow[1]" class="fa fa-arrow-up pointer" aria-hidden="true"
+                            <th>Title <i *ngIf="!sortArrow[1]" class="fa fa-arrow-up float-right pointer" aria-hidden="true"
                                 (click)="sorting(1,1)"></i>
     
                                         <!-- Descending -->
-                             <i *ngIf="sortArrow[1]" class="fa fa-arrow-down pointer" aria-hidden="true"
+                             <i *ngIf="sortArrow[1]" class="fa fa-arrow-down float-right pointer" aria-hidden="true"
                                 (click)="sorting(2,1)"></i></th>
                             <th>Date</th>
                             <th>Sales</th>
@@ -63,7 +70,7 @@
                       <!-- <th class="category" scope="col">0{{i}}</th> -->
                       <th class="title" scope="col">{{list.module_name}}</th>
                       
-                      <th class="post-date" scope="col">{{list.CreateOn_date}}</th>
+                      <th class="post-date" scope="col">{{list.created_at}}</th>
                       <th class="sales" scope="col">36 Sales</th>
                       <th class="actions" scope="col">
                         <a href="javascript:void(0)" (click)="Edit(list.module_name,list.id)" class="flaticon-edit-2"></a>

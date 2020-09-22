@@ -1,0 +1,8 @@
+.my-mat-dialog{
+    overflow: hidden !important;
+    margin-top: 8% !important;
+}
+.styled-pagination li.arrow a {
+    font-size: 14px !important;
+}
+.pointer {cursor: pointer;}

@@ -11,4 +11,25 @@ export class AuthService {
   getModule(data){
     return this.httpClient.post<any>(apiUrl.getModuleUrl, data);
   }
+  createModule(data){
+    return this.httpClient.post<any>(apiUrl.createModuleUrl, data);
+  }
+  updateModule(data){
+    return this.httpClient.post<any>(apiUrl.updateModuleUrl, data);
+  }
+  deleteModule(data){
+    return this.httpClient.post<any>(apiUrl.deleteModuleUrl, data);
+  }
+  getCategory(data){
+    return this.httpClient.post<any>(apiUrl.getCategoryUrl, data);
+  }
+  getSubCategory(data){
+    return this.httpClient.post<any>(apiUrl.getSubCategoryUrl, data);
+  }
+  createCategory(data){
+    return this.httpClient.post<any>(apiUrl.createCategoryUrl, data);
+  }
+  createSubCategory(data){
+    return this.httpClient.post<any>(apiUrl.createSubCategoryUrl, data);
+  }
 }

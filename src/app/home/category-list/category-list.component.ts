@@ -5,14 +5,20 @@ import { NotificationService } from '../../shared/toastr-notification/notificati
 import { MatDialog } from '@angular/material/dialog';
 import { AddModuleComponent } from '../add-module/add-module.component';
 declare var bootbox: any;
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
+export interface Module {
+  module_name: string,
+  module_id: number
+}
 @Component({
-  selector: 'app-main-modules',
-  templateUrl: './main-modules.component.html',
-  styleUrls: ['./main-modules.component.css']
+  selector: 'app-category-list',
+  templateUrl: './category-list.component.html',
+  styleUrls: ['./category-list.component.css']
 })
-export class MainModulesComponent implements OnInit {
-  @ViewChild('dt') table: Table;
+
+export class CategoryListComponent implements OnInit {
   cols: any[];
   sortArrow=[];
   pageSize : any;
@@ -26,7 +32,11 @@ export class MainModulesComponent implements OnInit {
   isPrev=0;
   isNext=0;
   rowdata=[];
-  isActive=1;
+  isActive = 1;
+  selectedModule: any;
+  
+  moduleList: any;
+  filteredOptions: Observable<Module[]>;
   constructor(
     private service: AuthService,
     private notifyService : NotificationService,
@@ -38,21 +48,53 @@ export class MainModulesComponent implements OnInit {
     this.currentPage=1;
     this.search='';
     this.sort='';
-    this.getmodules();
+    this.getCategory();
+    this.getModules();
     for(let i=0;i<2;i++)
     {
       this.sortArrow[i]=0;
     }
+    
   }
-  getmodules()
+  
+  getModules(){
+    this.data = {
+      "page":'',
+      "per_page":'',
+      "search":'',
+      "sort":''
+    }
+    this.service.getModule(this.data).subscribe(
+      response => {
+        console.log(response);
+        if (response.code == 200) {
+          // response.data.lists.data.forEach(element => {
+          //   this.rowdata.push(element);
+          // });
+          this.moduleList=response.data.lists.data;
+          
+          this.selectedModule = "abc";
+          // console.log(this.currentPage);
+          // this.notifyService.showSuccess(response.message,'');
+        }
+        else {
+          this.notifyService.showError(response.message, '');
+        }
+      },
+      error => {
+        this.notifyService.showError(error.error.errorMessage, '');
+      })
+  }
+  getCategory()
   {
     this.data = {
       "page":this.currentPage,
       "per_page":this.pageSize,
       "search":this.search,
-      "sort":this.sort
+      "sort":this.sort,
+      "module_id":"2"
     }
-    this.service.getModule(this.data).subscribe(
+    this.service.getCategory(this.data).subscribe(
       response => {
         console.log(response);
         if (response.code == 200) {
@@ -106,20 +148,20 @@ export class MainModulesComponent implements OnInit {
     }
     this.currentPage = number;
     this.isActive = number;
-    this.getmodules();
+    this.getCategory();
   }
   ClearSearch()
   {
     let searchtext=<any>document.getElementById("SearchText");
     searchtext.value='';
     this.search='';
-    this.getmodules();
+    this.getCategory();
   }
   Search()
   {
     let searchtext=<any>document.getElementById("SearchText");
     this.search=searchtext.value;
-    this.getmodules();
+    this.getCategory();
   }
   OpenAddModule()
   {
@@ -131,7 +173,7 @@ export class MainModulesComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(res =>{
-      this.getmodules();
+      this.getCategory();
     })
   }
   Edit(name,id){
@@ -145,7 +187,7 @@ export class MainModulesComponent implements OnInit {
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(res =>{
-      this.getmodules();
+      this.getCategory();
     })
   }
   Delete(id){
@@ -171,7 +213,7 @@ export class MainModulesComponent implements OnInit {
             response => {
               if (response.code == 200) {
                 that.notifyService.showSuccess(response.message, '');
-                that.getmodules();
+                that.getCategory();
               }
               else {
                 that.notifyService.showError(response.errorMessage, '');
@@ -188,7 +230,31 @@ export class MainModulesComponent implements OnInit {
   sorting(type,item){
     this.sortArrow[item]=!this.sortArrow[item];
     this.sort=type;
-    this.getmodules();
+    this.getCategory();
+  }
+  myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  myFunction2(name) {
+    let id = <any>document.getElementById("moduleText");
+    id.value=name;
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  filterFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    let div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
   }
 
 }

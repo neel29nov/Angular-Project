@@ -1,14 +1,12 @@
-<div class="edit-cource-section">
-    <div class="auto-container">
-        <!-- Sec Title -->
+
         <div class="sec-title">
             <div class="clearfix">
                 <div class="pull-left">
-                    <h4>Add Module</h4>
+                    <h4>{{type}} Module</h4>
                 </div>
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                     <a href="#"  class="see-all">Add Module</a>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="inner-container">
@@ -17,19 +15,27 @@
                 <!-- Left Column -->
                 <div class="left-column col-lg-12 col-md-12 col-sm-12">
                     <div class="inner-column">
-                        <h6>Basic Information</h6>
+                        
                         
                         <!-- Edit Course Form -->
                         <div class="edit-course-form">
-                            <form method="post" action="index.html">
+                            <form method="post" 
+                            (ngSubmit)="moduleForm.form.valid && onSubmit(model)" #moduleForm="ngForm">
                                 
                                 <!-- Form Group -->
                                 <div class="form-group">
                                     <label>Module</label>
-                                    <input type="text" name="module" value="" placeholder="Enter module" required="">
+                                    <input id="name" type="text" [(ngModel)]="model.module_name" name="module" 
+                                    value="" placeholder="Enter module" required="" #name="ngModel">
+                                    <div *ngIf="name.invalid && (name.dirty || name.touched || name.submitted)"
+                                        class="alert alert-danger">
+                                            <div *ngIf="name.errors.required">
+                                                Module Name is required.
+                                            </div>
+                                        </div>
                                 </div>
                                 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Category</label>
                                     <select class="custom-select-box">
                                         <option>UI/UX</option>
@@ -37,10 +43,11 @@
                                         <option>Category 02</option>
                                     </select>
                                     <span class="select-category">Select a category</span>
-                                </div>
+                                </div> -->
                                 <!-- Form Group -->
                                 <div class="form-group">
-                                    <button type="button" class="theme-btn btn-style-one"><span class="txt">Save Changes</span></button>
+                                    <button type="submit" class="theme-btn btn-style-one"><span class="txt">Save</span></button>
+                                    <button type="button" (click)="Close()" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button>
                                 </div>
                                 
                             </form>
@@ -51,6 +58,3 @@
                 
             </div>
         </div>
-        
-    </div>
-</div>

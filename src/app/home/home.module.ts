@@ -9,12 +9,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AddModuleComponent } from './add-module/add-module.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { CategoryListComponent } from './category-list/category-list.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { AddSubcategoryComponent } from './add-subcategory/add-subcategory.component';
+import { SubcategoryListComponent } from './subcategory-list/subcategory-list.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent],
+  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -25,10 +30,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    MatDialogModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatAutocompleteModule
   ],
   exports:[
     
-  ]
+  ],
+  entryComponents: [AddModuleComponent]
 })
 export class HomeModule { }
