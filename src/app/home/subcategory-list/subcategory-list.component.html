@@ -1,1 +1,111 @@
-<p>subcategory-list works!</p>
+<!-- <p-table #dt [value]="rowdata" [rowsPerPageOptions]="[5,10,50]" [paginator]="true" [rows]="5"
+[showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+        <tr>
+            <td>
+                {{row.module_name}}
+            </td>
+        </tr>
+    </ng-template>
+</p-table> -->
+<div class="manage-cource-section">
+    <div class="auto-container">
+        <!-- Sec Title -->
+        <div class="sec-title">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4>Manage Sub-Category</h4>
+
+                    
+                </div>
+                
+                
+
+                <div class="pull-right">
+                    <a href="javascript:void(0)" (click)="OpenAddModule()" class="see-all">Add Sub-Category</a>
+                </div>
+            </div>
+        </div>
+        <div class="inner-container">
+            <div class="container-content">
+                <!-- <span> Select Module</span> -->
+                <input type="text" id="moduleText" (click)="myFunction()" class="mat-input-element">
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()">
+                            <a *ngFor="let list of moduleList; let i = index" href="javascript:void(0)"
+                            (click)="myFunction2(list.module_name,list.id)">{{list.module_name}}</a>
+                        </div>
+
+                        <input type="text" id="categoryText" (click)="myFunctionC()" class="mat-input-element">
+                        <div id="myDropdownC" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInputC" (keyup)="filterFunctionC()">
+                            <a *ngFor="let list of CategoryList; let i = index" href="javascript:void(0)"
+                            (click)="myFunction2C(list.subject_name,list.id)">{{list.subject_name}}</a>
+                        </div>
+                
+                <mat-form-field class="example-form-field pull-right">
+                    <mat-label>Search</mat-label>
+                    <input (keyup.enter)="Search()" id="SearchText" matInput type="text">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="ClearSearch()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                <table class="table">
+                  <thead>
+                        <tr>
+                            <th>Title <i *ngIf="!sortArrow[1]" class="fa fa-arrow-up float-right pointer" aria-hidden="true"
+                                (click)="sorting(1,1)"></i>
+    
+                                        <!-- Descending -->
+                             <i *ngIf="sortArrow[1]" class="fa fa-arrow-down float-right pointer" aria-hidden="true"
+                                (click)="sorting(2,1)"></i></th>
+                            <th>Date</th>
+                            <th>Sales</th>
+                            <th>Action</th>
+
+                        </tr>
+                  </thead>
+                  <tbody>
+                  
+                    <tr *ngFor="let list of rowdata; let i = index">
+                      <!-- <th class="category" scope="col">0{{i}}</th> -->
+                      <th class="title" scope="col">{{list.sub_category_name}}</th>
+                      
+                      <th class="post-date" scope="col">{{list.CreateOn_date}}</th>
+                      <th class="sales" scope="col">36 Sales</th>
+                      <th class="actions" scope="col">
+                        <a href="javascript:void(0)" (click)="Edit(list.sub_category_name,list.id)" class="flaticon-edit-2"></a>
+                        <a href="javascript:void(0)" (click)="Delete(list.id)" class="flaticon-trash"></a></th>
+                    </tr>
+                    
+                    
+                    
+                    
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Post Share Options -->
+        <div class="styled-pagination margin-top text-center">
+            <ul class="clearfix">
+                <li *ngIf="isPrev" class="arrow"><a href="#"><span class="fa fa-angle-left"></span> </a></li>
+                <!-- <li class="prev"><a href="#">Prev</a></li> -->
+                <span *ngFor="let list of pageCount; let i = index">
+                    <li *ngIf="isActive==list" class="active" ><a href="javascript:void(0)">{{list}}</a></li>
+                    <li *ngIf="isActive!=list"><a href="javascript:void(0)" (click)="handlePage(list)" >{{list}}</a></li>
+                </span>
+                <!-- <li class="next"><a href="#">Next</a></li> -->
+                <li *ngIf="isNext" class="arrow"><a href="#"><span class="fa fa-angle-right"></span> </a></li>
+            </ul>
+        </div>
+        
+    </div>
+</div>

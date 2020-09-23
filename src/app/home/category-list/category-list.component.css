@@ -29,7 +29,10 @@
     border: none;
     border-bottom: 1px solid #ddd;
   }
-  
+  #moduleText{
+    width: 25%;
+    border: 1px black solid;
+  }
   #myInput:focus {outline: 3px solid #ddd;}
   
   .dropdown {

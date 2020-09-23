@@ -37,6 +37,6 @@ import { SubcategoryListComponent } from './subcategory-list/subcategory-list.co
   exports:[
     
   ],
-  entryComponents: [AddModuleComponent]
+  entryComponents: [AddModuleComponent,AddCategoryComponent,AddSubcategoryComponent]
 })
 export class HomeModule { }

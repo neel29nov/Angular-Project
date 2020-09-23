@@ -7,6 +7,7 @@ import { AddModuleComponent } from '../add-module/add-module.component';
 declare var bootbox: any;
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { AddCategoryComponent } from '../add-category/add-category.component';
 
 export interface Module {
   module_name: string,
@@ -33,10 +34,8 @@ export class CategoryListComponent implements OnInit {
   isNext=0;
   rowdata=[];
   isActive = 1;
-  selectedModule: any;
-  
+  selectedModuleId: any;
   moduleList: any;
-  filteredOptions: Observable<Module[]>;
   constructor(
     private service: AuthService,
     private notifyService : NotificationService,
@@ -48,8 +47,9 @@ export class CategoryListComponent implements OnInit {
     this.currentPage=1;
     this.search='';
     this.sort='';
-    this.getCategory();
     this.getModules();
+    
+    
     for(let i=0;i<2;i++)
     {
       this.sortArrow[i]=0;
@@ -72,8 +72,10 @@ export class CategoryListComponent implements OnInit {
           //   this.rowdata.push(element);
           // });
           this.moduleList=response.data.lists.data;
-          
-          this.selectedModule = "abc";
+          let id = <any>document.getElementById("moduleText");
+          id.value=this.moduleList[0].module_name;
+          this.selectedModuleId = this.moduleList[0].id;
+          this.getCategory();
           // console.log(this.currentPage);
           // this.notifyService.showSuccess(response.message,'');
         }
@@ -92,7 +94,7 @@ export class CategoryListComponent implements OnInit {
       "per_page":this.pageSize,
       "search":this.search,
       "sort":this.sort,
-      "module_id":"2"
+      "module_id":this.selectedModuleId
     }
     this.service.getCategory(this.data).subscribe(
       response => {
@@ -165,9 +167,10 @@ export class CategoryListComponent implements OnInit {
   }
   OpenAddModule()
   {
-    let dialogRef = this.dialog.open(AddModuleComponent, {
+    let dialogRef = this.dialog.open(AddCategoryComponent, {
       data: {
-        type : 'add'
+        type : 'add',
+        module_id: this.selectedModuleId
       },
       width: '680px',
       disableClose: true
@@ -177,7 +180,7 @@ export class CategoryListComponent implements OnInit {
     })
   }
   Edit(name,id){
-    let dialogRef = this.dialog.open(AddModuleComponent, {
+    let dialogRef = this.dialog.open(AddCategoryComponent, {
       data: {
         type : 'edit',
         name: name,
@@ -207,9 +210,9 @@ export class CategoryListComponent implements OnInit {
       callback: function (result) {
         if (result) {
          let data ={
-            "module_id":id
+            "category_id":id
           }
-          that.service.deleteModule(data).subscribe(
+          that.service.deleteCategory(data).subscribe(
             response => {
               if (response.code == 200) {
                 that.notifyService.showSuccess(response.message, '');
@@ -235,9 +238,11 @@ export class CategoryListComponent implements OnInit {
   myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
-  myFunction2(name) {
+  myFunction2(name,module_id) {
     let id = <any>document.getElementById("moduleText");
     id.value=name;
+    this.selectedModuleId = module_id;
+    this.getCategory();
     document.getElementById("myDropdown").classList.toggle("show");
   }
   

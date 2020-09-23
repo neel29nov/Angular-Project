@@ -32,4 +32,16 @@ export class AuthService {
   createSubCategory(data){
     return this.httpClient.post<any>(apiUrl.createSubCategoryUrl, data);
   }
+  editCategory(data){
+    return this.httpClient.post<any>(apiUrl.editCategoryUrl, data);
+  }
+  editSubCategory(data){
+    return this.httpClient.post<any>(apiUrl.editSubCategoryUrl, data);
+  }
+  deleteCategory(data){
+    return this.httpClient.post<any>(apiUrl.deleteCategoryUrl, data);
+  }
+  deleteSubCategory(data){
+    return this.httpClient.post<any>(apiUrl.deleteSubCategoryUrl, data);
+  }
 }
