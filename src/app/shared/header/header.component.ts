@@ -87,6 +87,24 @@ export class HeaderComponent implements OnInit {
         $('.round').removeClass('boll-right');
         $('body').removeClass('dark-body');
       });
+      $.getScript( 'assets/js/color-settings.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/jquery-ui.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/wow.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/owl.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/isotope.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/appear.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/jquery.fancybox.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/popper.min.js', function( data, textStatus, jqxhr ) {      
+      });
+      $.getScript( 'assets/js/jquery.js', function( data, textStatus, jqxhr ) {      
+      });
       
     }
     

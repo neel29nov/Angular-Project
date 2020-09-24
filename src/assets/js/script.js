@@ -100,10 +100,11 @@
 	
 	
 	
-	console.log($('.hidden-bar').length);
+	console.log("Hidden bar length:",$('.hidden-bar').length);
 	//Hidden Sidebar
+	
 	if ($('.hidden-bar').length) {
-		alert('b');
+		
 		var hiddenBar = $('.hidden-bar');
 		var hiddenBarOpener = $('.hidden-bar-opener');
 		var hiddenBarCloser = $('.hidden-bar-closer');

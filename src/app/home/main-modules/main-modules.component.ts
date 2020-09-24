@@ -43,6 +43,7 @@ export class MainModulesComponent implements OnInit {
     {
       this.sortArrow[i]=0;
     }
+    
   }
   getmodules()
   {
