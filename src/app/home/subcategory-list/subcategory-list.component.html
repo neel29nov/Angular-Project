@@ -36,18 +36,22 @@
         <div class="inner-container">
             <div class="container-content">
                 <!-- <span> Select Module</span> -->
-                <input type="text" id="moduleText" (click)="myFunction()" class="mat-input-element">
+                <input type="text" id="moduleText" (click)="myFunction()" class="mat-input-element" readonly>
                         <div id="myDropdown" class="dropdown-content">
-                            <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()">
-                            <a *ngFor="let list of moduleList; let i = index" href="javascript:void(0)"
-                            (click)="myFunction2(list.module_name,list.id)">{{list.module_name}}</a>
+                            <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()" autocomplete="off">
+                            <div class="scrollbar scrollbar-lady-lips thin">
+                                <a *ngFor="let list of moduleList; let i = index" href="javascript:void(0)"
+                                (click)="myFunction2(list.module_name,list.id)">{{list.module_name}}</a>
+                            </div>
                         </div>
 
-                        <input type="text" id="categoryText" (click)="myFunctionC()" class="mat-input-element">
-                        <div id="myDropdownC" class="dropdown-content">
-                            <input type="text" placeholder="Search.." id="myInputC" (keyup)="filterFunctionC()">
-                            <a *ngFor="let list of CategoryList; let i = index" href="javascript:void(0)"
-                            (click)="myFunction2C(list.subject_name,list.id)">{{list.subject_name}}</a>
+                        <input type="text" id="categoryText" (click)="myFunctionC()" class="mat-input-element" readonly>
+                        <div id="myDropdownC" class="dropdown-contentC">
+                            <input type="text" placeholder="Search.." id="myInputC" (keyup)="filterFunctionC()"autocomplete="off">
+                            <div class="scrollbar scrollbar-lady-lips thin">
+                                <a *ngFor="let list of CategoryList; let i = index" href="javascript:void(0)"
+                                (click)="myFunction2C(list.subject_name,list.id)">{{list.subject_name}}</a>
+                            </div>
                         </div>
                 
                 <mat-form-field class="example-form-field pull-right">
