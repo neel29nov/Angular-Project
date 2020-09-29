@@ -4,7 +4,7 @@
         <div class="sec-title">
             <div class="clearfix">
                 <div class="pull-left">
-                    <h4>Add Question</h4>
+                    <h4>Create Test</h4>
                 </div>
                 <div class="pull-right">
                     <a href="javascript:void(0)" class="see-all">Test List</a>
@@ -43,7 +43,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Category</label>
-                                                <input id="name" type="text"  name="module" 
+                                                <input id="category" type="text"  name="category" 
                                                 value="" placeholder="Enter Category" required="">
                                                 
                                             </div>
@@ -51,86 +51,44 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label>Sub Category</label>
-                                                <input id="name" type="text"  name="module" 
-                                                value="" placeholder="Enter Category" required="">
+                                                <input id="subCategory" type="text"  name="sub_category" 
+                                                value="" placeholder="Enter Sub Category" required="">
                                                 
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Question</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="">Option Type</label>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
-                        
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptions"  id="inlineRadio1" value="2" checked>
-                                                    <label class="form-check-label" for="inlineRadio1" >Radio</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptions" id="inlineRadio2" value="1">
-                                                    <label class="form-check-label" for="inlineRadio2">Checkbox</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="">Number of Options</label>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
-                        
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptionss"  id="inlineRadio3" value="4" checked>
-                                                    <label class="form-check-label" for="inlineRadio3" >Four</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptionss" id="inlineRadio4" value="5">
-                                                    <label class="form-check-label" for="inlineRadio4" >Five</label>
-                                                </div>
+                                                <label>Test Topic</label>
+                                                <input id="testTopic" type="text"  name="test_topic" 
+                                                value="" placeholder="Enter Topic" required="">
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 1</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label>Number of Question</label>
+                                                <input id="noQuestion" type="text"  name="noQuestion" 
+                                                value="" placeholder="Enter Number of Question" required="">
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 2</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label>Time</label>
+                                                <input id="time" type="time"  name="time" 
+                                                value="" placeholder="Enter Test Time" required="">
+                                                
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 3</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label>Published Date</label>
+                                                <input id="publishedDate" type="date"  name="publishedDate" 
+                                                value="" placeholder="Enter published date" required="">
+                                                
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="">Option 4</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="">Option 5</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="">Correct Option</label>
-                                                <input id="name" type="text"  name="correct_option" 
-                                                value="" placeholder="Enter Correct Option" required="">
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                     <!-- Form Group -->
                                     
@@ -140,7 +98,8 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <button type="submit" class="theme-btn btn-style-one"><span class="txt">Save</span></button>
-                                        <button type="button" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button>
+                                        <button type="button" class="theme-btn btn-style-one"><span class="txt">Next</span></button>
+                                        <!-- <button type="button" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button> -->
                                     </div>
                                     
                                 </form>
