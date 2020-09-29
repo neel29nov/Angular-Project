@@ -24,6 +24,7 @@
     "@types/bootbox": "^5.2.1",
     "bootbox": "^5.4.0",
     "bootstrap": "^3.4.1",
+    "ckeditor4-angular": "^2.0.0",
     "jquery": "^3.5.1",
     "ngx-select-dropdown": "^1.4.4",
     "ngx-toastr": "^13.0.0",
