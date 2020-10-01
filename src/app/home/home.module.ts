@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { AddModuleComponent } from './add-module/add-module.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule,  } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddSubcategoryComponent } from './add-subcategory/add-subcategory.component';
@@ -37,7 +39,9 @@ import { AddQuestionComponent } from './add-question/add-question.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatAutocompleteModule,
-    CKEditorModule
+    CKEditorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports:[
     

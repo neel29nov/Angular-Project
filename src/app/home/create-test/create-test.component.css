@@ -21,7 +21,7 @@
     border: 1px solid #ddd;
     z-index: 1;
     left: 1.4%;
-    width: 18%;
+    width: 97%;
     /* top: 35%; */
   }
   .dropdown-content div{
@@ -58,3 +58,12 @@
     
   .thin::-webkit-scrollbar {
     width: 6px; }
+    .alert-danger {
+      color: #d9534f !important;
+      background-color: transparent !important; 
+      border-color: transparent !important;
+     }
+     .alert {
+       padding: 0rem 1.25rem !important;
+       margin-bottom: 0px !important;
+     }

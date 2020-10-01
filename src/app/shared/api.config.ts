@@ -15,4 +15,5 @@ export const apiUrl = {
     deleteCategoryUrl: 'api/categoryDelete',
     editSubCategoryUrl: 'api/subcategoryEdit',
     deleteSubCategoryUrl: 'api/subcategoryDelete',  
+    createTestUrl: 'api/examCreate'
 }

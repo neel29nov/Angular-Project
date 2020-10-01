@@ -44,4 +44,7 @@ export class AuthService {
   deleteSubCategory(data){
     return this.httpClient.post<any>(apiUrl.deleteSubCategoryUrl, data);
   }
+  createTest(data){
+    return this.httpClient.post<any>(apiUrl.createTestUrl, data);
+  }
 }

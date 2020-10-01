@@ -1,12 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Table } from 'primeng/table';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../home.service';
 import { NotificationService } from '../../shared/toastr-notification/notification.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddModuleComponent } from '../add-module/add-module.component';
 declare var bootbox: any;
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
 import { AddCategoryComponent } from '../add-category/add-category.component';
 
 export interface Module {
