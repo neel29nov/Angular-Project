@@ -1,0 +1,142 @@
+<div class="manage-cource-section">
+    <div class="auto-container">
+        <!-- Sec Title -->
+        <div class="sec-title">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4>Manage Test</h4>
+
+                    
+                </div>
+                
+                
+
+                <div class="pull-right">
+                    <a href="javascript:void(0)" (click)="OpenAddModule()" class="see-all">Add Test</a>
+                </div>
+            </div>
+        </div>
+        <div class="inner-container">
+            <div class="container-content">
+                <!-- <label>Select Module</label> -->
+                <input type="text" placeholder="Select Module" id="moduleText" (click)="myFunction()" class="mat-input-element" readonly>
+                
+                        <div id="myDropdown" class="dropdown-content">
+                            <input type="text" placeholder="Search.." id="myInput" (keyup)="filterFunction()" autocomplete="off">
+                            <div class="scrollbar scrollbar-lady-lips thin">
+                                <a *ngFor="let list of moduleList; let i = index" class="ui-menu-item" href="javascript:void(0)"
+                                (click)="myFunction2(list.module_name,list.id)">{{list.module_name}}</a>
+                            </div>
+                        </div>
+
+                        <input type="text" placeholder="Select Category" id="categoryText" (click)="myFunctionC()" class="mat-input-element" readonly>
+                        <div id="myDropdownC" class="dropdown-contentC">
+                            <input type="text" placeholder="Search.." id="myInputC" (keyup)="filterFunctionC()"autocomplete="off">
+                            <div class="scrollbar scrollbar-lady-lips thin">
+                                <a *ngFor="let list of CategoryList; let i = index" class="ui-menu-item" href="javascript:void(0)"
+                                (click)="myFunction2C(list.subject_name,list.id)">{{list.subject_name}}</a>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="Select Sub-Category" id="subcategoryText" (click)="myFunctionS()" class="mat-input-element" readonly>
+                        <div id="myDropdownS" class="dropdown-contentS">
+                            <input type="text" placeholder="Search.." id="myInputS" (keyup)="filterFunctionS()"autocomplete="off">
+                            <div class="scrollbar scrollbar-lady-lips thin">
+                                <a *ngFor="let list of subCategoryList; let i = index" class="ui-menu-item" href="javascript:void(0)"
+                                (click)="myFunction2S(list.sub_category_name,list.id)">{{list.sub_category_name}}</a>
+                            </div>
+                        </div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Enter a date range</mat-label>
+                            <mat-date-range-input [rangePicker]="picker" [max]="maxDate">
+                                <input matStartDate 
+                                    placeholder="Start date"
+                                    [(ngModel)]="startDate"
+                                    disabled
+                                >
+                                <input matEndDate placeholder="End date" [(ngModel)]="endDate" disabled
+                                (dateInput)="getTest()"
+                                >
+                            </mat-date-range-input>
+                            <mat-icon matDatepickerToggleIcon (click)="clearDate($event)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </mat-icon>
+                            <mat-datepicker-toggle disabled="false" matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker disabled="false" #picker></mat-date-range-picker>
+                        </mat-form-field>
+                
+                <mat-form-field class="example-form-field pull-right">
+                    <mat-label>Search</mat-label>
+                    <input (keyup.enter)="Search()" id="SearchText" matInput type="text">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="ClearSearch()">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </mat-form-field>
+                <table class="table">
+                  <thead>
+                        <tr>
+                            <th>Title <i *ngIf="!sortArrow[1]" class="fa fa-arrow-up float-right pointer" aria-hidden="true"
+                                (click)="sorting(1,1)"></i>
+    
+                                        <!-- Descending -->
+                             <i *ngIf="sortArrow[1]" class="fa fa-arrow-down float-right pointer" aria-hidden="true"
+                                (click)="sorting(2,1)"></i></th>
+                                <th>Module</th>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Date</th>
+                                <th>Time Limit</th>
+                                <th>Questions</th>
+                                <th>Questions Added</th>
+                                <th>Workflow</th>
+                                <th>Action</th>
+
+                        </tr>
+                  </thead>
+                  <tbody>
+                  
+                    <tr *ngFor="let list of rowdata; let i = index">
+                      <!-- <th class="category" scope="col">0{{i}}</th> -->
+                      <th class="title" scope="col">{{list.test_name}}</th>
+                      <th class="title" scope="col">{{list.module[0].module_name}}</th>
+                      <th class="title" scope="col">{{list.category[0].subject_name}}</th>
+                      <th class="title" scope="col">{{list.sub_category[0].sub_category_name}}</th>
+                      <th class="post-date" scope="col">{{list.CreateOn_date}}</th>
+                      <th class="title" scope="col">{{list.exam_time}}</th>
+                      <th class="sales" scope="col">{{list.no_of_ques}}</th>
+                      <th class="sales" scope="col">{{list.no_of_ques}}</th>
+                      <th *ngIf="list.workflow=='0'" class="sales" scope="col">Created</th>
+                      <th *ngIf="list.workflow=='1'" class="sales" scope="col">Published</th>
+                      <th *ngIf="list.workflow=='2'" class="sales" scope="col">Withdrawn</th>
+                      <th class="actions" scope="col">
+                        <a href="javascript:void(0)" (click)="Edit(list.sub_category_name,list.id)" class="flaticon-edit-2"></a>
+                        <a href="javascript:void(0)" (click)="Delete(list.id)" class="flaticon-trash"></a></th>
+                        <input type="button" value="Publish">
+                        <a href="javascript:void(0)" (click)="OpenQuesList(list.id)" class="see-all">
+                            Questions
+                        </a>
+                    </tr>
+                    
+                    
+                    
+                    
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Post Share Options -->
+        <div class="styled-pagination margin-top text-center">
+            <ul class="clearfix">
+                <li *ngIf="isPrev" class="arrow"><a href="#"><span class="fa fa-angle-left"></span> </a></li>
+                <!-- <li class="prev"><a href="#">Prev</a></li> -->
+                <span *ngFor="let list of pageCount; let i = index">
+                    <li *ngIf="isActive==list" class="active" ><a href="javascript:void(0)">{{list}}</a></li>
+                    <li *ngIf="isActive!=list"><a href="javascript:void(0)" (click)="handlePage(list)" >{{list}}</a></li>
+                </span>
+                <!-- <li class="next"><a href="#">Next</a></li> -->
+                <li *ngIf="isNext" class="arrow"><a href="#"><span class="fa fa-angle-right"></span> </a></li>
+            </ul>
+        </div>
+        
+    </div>
+</div>

@@ -22,10 +22,12 @@ import { SubcategoryListComponent } from './subcategory-list/subcategory-list.co
 import { CreateTestComponent } from './create-test/create-test.component';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { AddQuestionComponent } from './add-question/add-question.component';
+import { TestListComponent } from './test-list/test-list.component';
+import { QuestionsListComponent } from './questions-list/questions-list.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent],
+  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent, TestListComponent, QuestionsListComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

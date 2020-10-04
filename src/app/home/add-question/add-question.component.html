@@ -22,115 +22,157 @@
                             
                             <!-- Edit Course Form -->
                             <div class="edit-course-form">
-                                <form method="post">
+                                <form method="post" #quesForm="ngForm" (ngSubmit)="quesForm.form.valid && submitForm(model)">
                                     <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Module</label>
-                                                <!-- <input id="name" type="text"  name="module" 
-                                                value="" placeholder="Enter Category" required=""> -->
-                                                <input type="text" id="moduleText" class="mat-input-element" readonly>
-                                                <div id="myDropdown" class="dropdown-content">
-                                                    <input type="text" placeholder="Search.." id="myInput"  autocomplete="off">
-                                                    <div class="scrollbar scrollbar-lady-lips thin">
-                                                        <a class="ui-menu-item" href="javascript:void(0)"
-                                                        >fds</a>
+                                        
+                                        <div class="col-sm-6">
+                                            <label for="">Multiple Choice</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                        
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" 
+                                                    name="inlineRadioOptions" (click)="isMultiple=1" id="inlineRadio1" value="1" >
+                                                    <label class="form-check-label" for="inlineRadio1" >Yes</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" 
+                                                    name="inlineRadioOptions"  (click)="isMultiple=0" id="inlineRadio2" value="0" checked >
+                                                    <label class="form-check-label" for="inlineRadio2">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                                <label for="">Correct Options</label>
+                                                <div *ngIf="isMultiple==0" class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                        
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                        name="inlineRadioOptions2"  id="inlineRadio3" value="0" checked >
+                                                        <label class="form-check-label" for="inlineRadio3" >A</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                        name="inlineRadioOptions2" id="inlineRadio4" value="1" >
+                                                        <label class="form-check-label" for="inlineRadio4">B</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                        name="inlineRadioOptions2"  id="inlineRadio5" value="2" >
+                                                        <label class="form-check-label" for="inlineRadio5" >C</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                        name="inlineRadioOptions2"  id="inlineRadio6" value="3" >
+                                                        <label class="form-check-label" for="inlineRadio6">D</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" 
+                                                        name="inlineRadioOptions2"  id="inlineRadio7" value="4" >
+                                                        <label class="form-check-label" for="inlineRadio7" >E</label>
                                                     </div>
                                                 </div>
-                                                
+                                                <div *ngIf="isMultiple==1" class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                        
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions"  id="inlinecheck1" value="0" checked >
+                                                        <label class="form-check-label" for="inlinecheck1" >A</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions"  id="inlinecheck2" value="1" checked >
+                                                        <label class="form-check-label" for="inlinecheck2">B</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions"  id="inlinecheck3" value="2" >
+                                                        <label class="form-check-label" for="inlinecheck3" >C</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions" id="inlinecheck4" value="3" >
+                                                        <label class="form-check-label" for="inlinecheck4">D</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions"  id="inlinecheck5" value="4" >
+                                                        <label class="form-check-label" for="inlinecheck5" >E</label>
+                                                    </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Category</label>
-                                                <input id="name" type="text"  name="module" 
-                                                value="" placeholder="Enter Category" required="">
-                                                
+                                            <label for="">Question Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,5)">
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Sub Category</label>
-                                                <input id="name" type="text"  name="module" 
-                                                value="" placeholder="Enter Category" required="">
-                                                
+                                            <label for="">Option A Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,0)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Option B Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,1)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Option C Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,2)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Option D Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,3)">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="">Option E Image</label>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
+                                                <input type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event,4)">
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">Question</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="">Option Type</label>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
-                        
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptions"  id="inlineRadio1" value="2" checked>
-                                                    <label class="form-check-label" for="inlineRadio1" >Radio</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptions" id="inlineRadio2" value="1">
-                                                    <label class="form-check-label" for="inlineRadio2">Checkbox</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label for="">Number of Options</label>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
-                        
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptionss"  id="inlineRadio3" value="4" checked>
-                                                    <label class="form-check-label" for="inlineRadio3" >Four</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" 
-                                                    name="inlineRadioOptionss" id="inlineRadio4" value="5">
-                                                    <label class="form-check-label" for="inlineRadio4" >Five</label>
-                                                </div>
+                                                <ckeditor id="ckques" [(ngModel)]="model.ques"  data="<p>Enter Question</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 1</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label for="">Option A</label>
+                                                <ckeditor [(ngModel)]="model.answer[0]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option A</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 2</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label for="">Option B</label>
+                                                <ckeditor [(ngModel)]="model.answer[1]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option B</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 3</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label for="">Option C</label>
+                                                <ckeditor [(ngModel)]="model.answer[2]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option C</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 4</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label for="">Option D</label>
+                                                <ckeditor [(ngModel)]="model.answer[3]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option D</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="">Option 5</label>
-                                                <ckeditor data="<p>Enter your Question</p>"></ckeditor>
+                                                <label for="">Option E</label>
+                                                <ckeditor [(ngModel)]="model.answer[4]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option E</p>"></ckeditor>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label for="">Correct Option</label>
-                                                <input id="name" type="text"  name="correct_option" 
-                                                value="" placeholder="Enter Correct Option" required="">
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <!-- Form Group -->
                                     

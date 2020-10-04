@@ -47,4 +47,13 @@ export class AuthService {
   createTest(data){
     return this.httpClient.post<any>(apiUrl.createTestUrl, data);
   }
+  getTest(data){
+    return this.httpClient.post<any>(apiUrl.testListUrl, data);
+  }
+  getQuestion(data){
+    return this.httpClient.post<any>(apiUrl.questionListUrl, data);
+  }
+  addQuestion(data){
+    return this.httpClient.post<any>(apiUrl.addQuestionUrl, data);
+  }
 }
