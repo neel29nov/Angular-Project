@@ -39,7 +39,7 @@ export class QuestionsListComponent implements OnInit {
       response => {
         console.log(response);
         if (response.code == 200) {
-          this.questionList = response.data.lists.data;
+          this.questionList = response.data;
           // this.notifyService.showSuccess(response.message,'');
         }
         else {

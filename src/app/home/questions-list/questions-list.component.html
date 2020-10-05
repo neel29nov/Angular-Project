@@ -11,34 +11,14 @@
         <table class="table">
           <thead>
                 <tr>
-                        <th>Title</th>
-                        <th>Module</th>
-                        <th>Category</th>
-                        <th>Sub Category</th>
-                        <th>Date</th>
-                        <th>Time Limit</th>
                         <th>Questions</th>
-                        <th>Questions Added</th>
-                        <th>Workflow</th>
-                        <th>Action</th>
-
                 </tr>
           </thead>
           <tbody>
           
             <tr *ngFor="let list of questionList; let i = index">
               <!-- <th class="category" scope="col">0{{i}}</th> -->
-              <th class="title" scope="col">{{list.test_name}}</th>
-              <th class="title" scope="col">{{list.module[0].module_name}}</th>
-              <th class="title" scope="col">{{list.category[0].subject_name}}</th>
-              <th class="title" scope="col">{{list.sub_category[0].sub_category_name}}</th>
-              <th class="post-date" scope="col">{{list.CreateOn_date}}</th>
-              <th class="title" scope="col">{{list.exam_time}}</th>
-              <th class="sales" scope="col">{{list.no_of_ques}}</th>
-              <th class="sales" scope="col">{{list.no_of_ques}}</th>
-              <th *ngIf="list.workflow=='0'" class="sales" scope="col">Created</th>
-              <th *ngIf="list.workflow=='1'" class="sales" scope="col">Published</th>
-              <th *ngIf="list.workflow=='2'" class="sales" scope="col">Withdrawn</th>
+              <th class="title" scope="col">Question {{i}}: <div [innerHTML]="list.question"></div></th>
               <th class="actions" scope="col">
                 <!-- <a href="javascript:void(0)" (click)="Edit(list.sub_category_name,list.id)" class="flaticon-edit-2"></a>
                 <a href="javascript:void(0)" (click)="Delete(list.id)" class="flaticon-trash"></a></th>

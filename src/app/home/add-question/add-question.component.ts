@@ -4,6 +4,8 @@ import { NotificationService } from '../../shared/toastr-notification/notificati
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var bootbox: any;
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 
 @Component({
   selector: 'app-add-question',
@@ -11,6 +13,7 @@ declare var bootbox: any;
   styleUrls: ['./add-question.component.css']
 })
 export class AddQuestionComponent implements OnInit {
+  public Editor = ClassicEditor;
 
   constructor(
     private activatedRoute : ActivatedRoute,
@@ -34,14 +37,24 @@ export class AddQuestionComponent implements OnInit {
     this.model.type=0;
     this.model.correct_ans[0]=1;
   }
-  model: any = {
+  public onChange( { editor }: ChangeEvent , value) {
+    const data = editor.getData();
+    if(value<0)
+    {
+      this.model.ques=data;
+    }
+    else{
+      this.model.answer[value]=data;
+    }
+}
+  public model: any = {
     "exam_id":"",
-    "ques":"",
+    "ques":'',
     "answer":[],
     "type":"",
     "image_ques":"",
     "image_ans":[],
-    "correct_ans":[],
+    "correct_ans":[]
   }
   loadFile(fileInput: any,value) {
     console.log(fileInput.target.files[0])
@@ -54,8 +67,7 @@ export class AddQuestionComponent implements OnInit {
     }    
   }
   submitForm(formValue){
-    console.log(formValue)
-    console.log(this.model)
+    
     let a = <any>document.getElementById("inlineRadio2");
     let b = <any>document.getElementById("inlineRadio1");
     let c = <any>document.getElementsByName("inlineRadioOptions2");
@@ -80,16 +92,23 @@ export class AddQuestionComponent implements OnInit {
     var formData: any = new FormData();
     formData.append('exam_id', this.ExamId)
     formData.append('ques', formValue.ques)
-    formData.append('answer', formValue.answer)
+    for(let i=0;i<5;i++)
+    {
+      formData.append('answer['+i+']', formValue.answer[i])
+      formData.append('correct_ans['+i+']', this.model.correct_ans[i])
+      formData.append('image_ans['+i+']', this.model.image_ans[i])
+    }
     formData.append('type', this.model.type)
     formData.append('image_ques', this.model.image_ques)
-    formData.append('image_ans', this.model.image_ans)
-    formData.append('correct_ans', this.model.correct_ans)
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+  }
+    
     this.service.addQuestion(formData).subscribe(
       response => {
         if (response.statusCode == 200) {
           this.notifyService.showSuccess(response.errorMessage, '');
-          // this.router.navigate(['Home/Superadmin/Organization/approved-organization']);
+          this.router.navigate(['/Home/question-list'],{queryParams: {ExamId: this.ExamId}});
         }
         else {
           this.notifyService.showError(response.errorMessage, '');
@@ -98,5 +117,8 @@ export class AddQuestionComponent implements OnInit {
       error => {
         this.notifyService.showError(error.error.errorMessage, '')
       })
+  }
+  close(){
+    this.router.navigate(['/Home/question-list'],{queryParams: {ExamId: this.ExamId}});
   }
 }

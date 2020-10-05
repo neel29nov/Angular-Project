@@ -20,10 +20,10 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { AddSubcategoryComponent } from './add-subcategory/add-subcategory.component';
 import { SubcategoryListComponent } from './subcategory-list/subcategory-list.component';
 import { CreateTestComponent } from './create-test/create-test.component';
-import { CKEditorModule } from 'ckeditor4-angular';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 
 @NgModule({

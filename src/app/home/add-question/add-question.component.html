@@ -139,37 +139,37 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">Question</label>
-                                                <ckeditor id="ckques" [(ngModel)]="model.ques"  data="<p>Enter Question</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,-1)" id="ckques" [(ngModel)]="model.ques" data="<p>Enter Question</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="">Option A</label>
-                                                <ckeditor [(ngModel)]="model.answer[0]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option A</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,0)" [(ngModel)]="model.answer[0]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option A</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="">Option B</label>
-                                                <ckeditor [(ngModel)]="model.answer[1]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option B</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,1)" [(ngModel)]="model.answer[1]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option B</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="">Option C</label>
-                                                <ckeditor [(ngModel)]="model.answer[2]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option C</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,2)" [(ngModel)]="model.answer[2]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option C</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="">Option D</label>
-                                                <ckeditor [(ngModel)]="model.answer[3]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option D</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,3)" [(ngModel)]="model.answer[3]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option D</p>"></ckeditor>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="">Option E</label>
-                                                <ckeditor [(ngModel)]="model.answer[4]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option E</p>"></ckeditor>
+                                                <ckeditor [editor]="Editor" (change)="onChange($event,4)" [(ngModel)]="model.answer[4]" [config]="{ toolbar: [ [ 'Bold' ] ] }" data="<p>Enter Option E</p>"></ckeditor>
                                             </div>
                                         </div>
                                         
@@ -182,7 +182,7 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <button type="submit" class="theme-btn btn-style-one"><span class="txt">Save</span></button>
-                                        <button type="button" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button>
+                                        <button type="button" (click)="close()" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button>
                                     </div>
                                     
                                 </form>
