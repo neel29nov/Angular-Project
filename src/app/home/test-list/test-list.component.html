@@ -108,7 +108,7 @@
                       <th *ngIf="list.workflow=='1'" class="sales" scope="col">Published</th>
                       <th *ngIf="list.workflow=='2'" class="sales" scope="col">Withdrawn</th>
                       <th class="actions" scope="col">
-                        <a href="javascript:void(0)" (click)="Edit(list.sub_category_name,list.id)" class="flaticon-edit-2"></a>
+                        <a href="javascript:void(0)" (click)="Edit(list.id)" class="flaticon-edit-2"></a>
                         <a href="javascript:void(0)" (click)="Delete(list.id)" class="flaticon-trash"></a></th>
                         <input type="button" value="Publish">
                         <a href="javascript:void(0)" (click)="OpenQuesList(list.id)" class="see-all">

@@ -253,19 +253,8 @@ export class TestListComponent implements OnInit {
   {
     this.router.navigate(['/Home/create-test']);
   }
-  Edit(name,id){
-    let dialogRef = this.dialog.open(AddSubcategoryComponent, {
-      data: {
-        type : 'edit',
-        name: name,
-        id:id
-      },
-      width: '680px',
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe(res =>{
-      this.getSubCategory();
-    })
+  Edit(id){
+    this.router.navigate(['/Home/create-test'],{queryParams: {TestId: id}});
   }
   Delete(id){
     var that = this;

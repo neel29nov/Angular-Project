@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../home.service';
 import { NotificationService } from '../../shared/toastr-notification/notification.service';
 import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
 declare var bootbox: any;
 import { AddCategoryComponent } from '../add-category/add-category.component';
 
@@ -15,7 +16,8 @@ export class CreateTestComponent implements OnInit {
   constructor(
     private service: AuthService,
     private notifyService : NotificationService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private activatedRoute : ActivatedRoute 
   ) { }
   moduleList:any[];
   selectedModuleId: any;
@@ -30,10 +32,58 @@ export class CreateTestComponent implements OnInit {
 	test_name:'',
 	no_of_ques:"",
 	exam_time:"",
-	publish_date:""
+  publish_date:"",
+  test_id:""
   }
+  type:any;
   ngOnInit(): void {
-    this.getModules();
+    this.activatedRoute.queryParams.subscribe(params =>{
+      if(params.TestId){
+        this.model.test_id=params.TestId
+        this.getTestDetails(params.TestId);
+        this.type="edit";
+      }
+      else{
+        this.getModules();
+        this.type="add";
+      }
+    })
+    
+  }
+  getTestDetails(id){
+    let data = {
+      "exam_id":id,      
+    }
+    this.service.getTestDetail(data).subscribe(
+      response => {
+        console.log(response);
+        if (response.code == 200) {
+          let details = response.data;
+          this.selectedModuleId = details.module_id;
+          this.selectedCategoryId = details.category_id;
+          this.selectedSubCategory = details.sub_category_id;
+          let Mid = <any>document.getElementById("moduleText");
+          Mid.value=details.module_name;
+          let Cid = <any>document.getElementById("categoryText");
+          Cid.value=details.category_name;
+          let Sid = <any>document.getElementById("subcategoryText");
+          Sid.value=details.sub_category_name;
+          this.model.test_name = details.test_name;
+          this.model.no_of_ques = details.no_of_ques;
+          this.model.exam_time = details.exam_time;
+          this.model.publish_date = details.publish_date;
+
+          this.getModules();
+        this.getCategory();
+        this.getSubCategory();
+        }
+        else {
+          this.notifyService.showError(response.message, '');
+        }
+      },
+      error => {
+        this.notifyService.showError(error.error.errorMessage, '');
+      })
   }
   getModules(){
     let data = {
@@ -201,6 +251,7 @@ export class CreateTestComponent implements OnInit {
     }
   }
   onSubmit(values){
+    if(this.type="add"){
     values.module_id= this.selectedModuleId;
     values.category_id = this.selectedCategoryId;
     values.sub_category_id = this.selectedSubCategory;
@@ -217,6 +268,26 @@ export class CreateTestComponent implements OnInit {
       error => {
         this.notifyService.showError(error.error.errorMessage, '');
       })
+    }
+    else{
+      values.module_id= this.selectedModuleId;
+    values.category_id = this.selectedCategoryId;
+    values.sub_category_id = this.selectedSubCategory;
+    this.service.updateTest(values).subscribe(
+      response => {
+        console.log(response);
+        if (response.code == 200) {
+          this.notifyService.showSuccess(response.message,'');
+        }
+        else {
+          this.notifyService.showError(response.message, '');
+        }
+      },
+      error => {
+        this.notifyService.showError(error.error.errorMessage, '');
+      })
+    }
+    
   }
 
 }

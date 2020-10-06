@@ -18,5 +18,7 @@ export const apiUrl = {
     createTestUrl: 'api/examCreate',
     testListUrl: 'api/examList',
     questionListUrl: 'api/quesAnsList',
-    addQuestionUrl: 'api/quesAnsCreate'
+    addQuestionUrl: 'api/quesAnsCreate',
+    getTestDetailUrl: 'api/examDetails',
+    updateTestUrl: 'api/examEdit'
 }
