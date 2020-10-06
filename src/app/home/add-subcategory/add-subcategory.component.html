@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label>Sub-Category</label>
                                     <input id="name" type="text" [(ngModel)]="model.sub_category_name" name="module" 
-                                    value="" placeholder="Enter Category" required="" #name="ngModel">
+                                    value="" placeholder="Enter Category" required="" #name="ngModel" autocomplete="off">
                                     <div *ngIf="name.invalid && (name.dirty || name.touched || name.submitted)"
                                         class="alert alert-danger">
                                             <div *ngIf="name.errors.required">

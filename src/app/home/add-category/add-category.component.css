@@ -73,14 +73,14 @@
 	  position: absolute;
 	  background-color: #f6f6f6;
 	  border: 1px solid #ddd;
-	  z-index: 1;
-	  left: 1.4%;
-	  width: 18%;
+	  z-index: 9;
+	  /* left: 1.4%; */
+	  width: 100%;
 	  /* top: 35%; */
 	}
 	.dropdown-content div{
 	  overflow: auto;
-	  height: 200px;
+	  height: auto;
 	}
 	
 	.dropdown-content a {
@@ -89,7 +89,9 @@
 	  text-decoration: none;
 	  display: block;
 	}
-	
+	.dropdown-content a:hover{
+		color: #fff;
+	  }
 	.dropdown a:hover {background-color: #ddd;}
 	
 	.show {display: block;}
