@@ -17,6 +17,7 @@ export class CreateTestComponent implements OnInit {
     private service: AuthService,
     private notifyService : NotificationService,
     public dialog: MatDialog,
+    private router: Router,
     private activatedRoute : ActivatedRoute 
   ) { }
   moduleList:any[];
@@ -33,9 +34,13 @@ export class CreateTestComponent implements OnInit {
 	no_of_ques:"",
 	exam_time:"",
   publish_date:"",
-  test_id:""
+  test_id:"",
+  score: "",
+  is_minus: 0,
+  minus_score: ""
   }
   type:any;
+  isMinus=0;
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params =>{
       if(params.TestId){
@@ -72,7 +77,11 @@ export class CreateTestComponent implements OnInit {
           this.model.no_of_ques = details.no_of_ques;
           this.model.exam_time = details.exam_time;
           this.model.publish_date = details.publish_date;
-
+          this.model.score = details.score;
+          this.model.is_minus = details.is_minus;
+          this.model.minus_score = details.minus_score;
+          let isMinusid = <any>document.getElementById("inlinecheck3");
+          isMinusid.checked= this.model.is_minus == 1 ? true : false;
           this.getModules();
         this.getCategory();
         this.getSubCategory();
@@ -260,6 +269,7 @@ export class CreateTestComponent implements OnInit {
         console.log(response);
         if (response.code == 200) {
           this.notifyService.showSuccess(response.message,'');
+          this.gotoList();
         }
         else {
           this.notifyService.showError(response.message, '');
@@ -278,6 +288,7 @@ export class CreateTestComponent implements OnInit {
         console.log(response);
         if (response.code == 200) {
           this.notifyService.showSuccess(response.message,'');
+          this.gotoList();
         }
         else {
           this.notifyService.showError(response.message, '');
@@ -289,5 +300,20 @@ export class CreateTestComponent implements OnInit {
     }
     
   }
+  isMinusCheck(event)
+  {
+    this.isMinus = event.target.checked;
+    if(event.target.checked)
+    {
+      this.model.is_minus = 1;
+    }
+    else{
+      this.model.is_minus = 0;
+    }
+    
+  }
 
+  gotoList(){
+    this.router.navigate(['/Home/test-list']);
+  }
 }

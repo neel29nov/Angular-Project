@@ -7,7 +7,7 @@
                     <h4>Create Test</h4>
                 </div>
                 <div class="pull-right">
-                    <a href="javascript:void(0)" class="see-all">Test List</a>
+                    <a href="javascript:void(0)" class="see-all" (click)="gotoList()">Test List</a>
                 </div>
             </div>
         </div>
@@ -145,6 +145,45 @@
                                                 
                                             </div>
                                         </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Total Score</label>
+                                                <input [(ngModel)]="model.score" id="totalScore" type="number"  name="noQuestion" 
+                                                value="" placeholder="Enter Total Score" required="" #score="ngModel">
+                                                <div *ngIf="score.invalid && (score.dirty || score.touched || testForm.submitted)"
+                                                    class="alert alert-danger">
+                
+                                                            <div *ngIf="score.errors.required">
+                                                                Total Score is required.
+                                                            </div>
+                            
+                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            
+                                                <input class="form-check-input" type="checkbox" 
+                                                        name="inlinecheckOptions"  id="inlinecheck3" value="2" 
+                                                        (click)=isMinusCheck($event) > 
+                                                <label class="form-check-label" for="inlinecheck3" >Is Minus Marking</label>                                               
+                                           
+                                        </div>
+                                        <div *ngIf="isMinus" class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Minus Score(per question)</label>
+                                                <input [(ngModel)]="model.minus_score" id="minusScore" type="number"  name="minusScore" 
+                                                value="" placeholder="Enter Minus Score" required="" #minusScore="ngModel">
+                                                <!-- <div *ngIf="isMinus && minusScore.invalid && (minusScore.dirty || minusScore.touched || testForm.submitted)"
+                                                    class="alert alert-danger">
+                
+                                                            <div *ngIf="minusScore.errors.required">
+                                                                Minus Score is required.
+                                                            </div>
+                            
+                                                    </div> -->
+                                            </div>
+                                        </div>
+                                        
                                        
                                     </div>
                                     <!-- Form Group -->
@@ -155,7 +194,7 @@
                                     <!-- Form Group -->
                                     <div class="form-group">
                                         <button type="submit" class="theme-btn btn-style-one"><span class="txt">Save</span></button>
-                                        <button type="button" class="theme-btn btn-style-one"><span class="txt">Next</span></button>
+                                        <button type="button" class="theme-btn btn-style-one" (click)="gotoList()"><span class="txt">Cancel</span></button>
                                         <!-- <button type="button" class="theme-btn btn-style-one"><span class="txt">Cancel</span></button> -->
                                     </div>
                                     
