@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var bootbox: any;
 import { AddSubcategoryComponent } from '../add-subcategory/add-subcategory.component';
-
+declare var $:any;
 @Component({
   selector: 'app-test-list',
   templateUrl: './test-list.component.html',
@@ -36,6 +36,7 @@ export class TestListComponent implements OnInit {
   subCategoryList:any;
   startDate:any="";
   endDate:any="";
+  loader = false;
   constructor(
     private service: AuthService,
     private router: Router,
@@ -69,10 +70,12 @@ export class TestListComponent implements OnInit {
       "search":'',
       "sort":''
     }
+    this.loader=true;
     this.service.getModule(this.data).subscribe(
       response => {
         console.log(response);
         if (response.code == 200) {
+          this.loader=false;
           // response.data.lists.data.forEach(element => {
           //   this.rowdata.push(element);
           // });
@@ -90,6 +93,7 @@ export class TestListComponent implements OnInit {
         }
       },
       error => {
+        this.loader=false;
         this.notifyService.showError(error.error.errorMessage, '');
       })
   }
@@ -101,8 +105,10 @@ export class TestListComponent implements OnInit {
       "sort":'',
       "module_id":this.selectedModuleId
     }
+    this.loader=true;
     this.service.getCategory(this.data).subscribe(
       response => {
+        this.loader=false;
         console.log(response);
         if (response.code == 200) {
           // response.data.lists.data.forEach(element => {
@@ -122,6 +128,7 @@ export class TestListComponent implements OnInit {
         }
       },
       error => {
+        this.loader=false;
         this.notifyService.showError(error.error.errorMessage, '');
       })
   }
@@ -135,8 +142,10 @@ export class TestListComponent implements OnInit {
       "module_id":this.selectedModuleId,
       "category_id": this.selectedCategoryId
     }
+    this.loader=true;
     this.service.getSubCategory(this.data).subscribe(
       response => {
+        this.loader=false;
         console.log(response);
         if (response.code == 200) {
           // response.data.lists.data.forEach(element => {
@@ -155,6 +164,7 @@ export class TestListComponent implements OnInit {
         }
       },
       error => {
+        this.loader=false;
         this.notifyService.showError(error.error.errorMessage, '');
       })
   }
@@ -180,8 +190,10 @@ export class TestListComponent implements OnInit {
       "start_date":this.startDate,
       "end_date":this.endDate
     }
+    this.loader=true;
     this.service.getTest(data).subscribe(
       response => {
+        this.loader=false;
         console.log(response);
         if (response.code == 200) {
           // response.data.lists.data.forEach(element => {
@@ -214,8 +226,10 @@ export class TestListComponent implements OnInit {
         }
       },
       error => {
+        this.loader=false;
         this.notifyService.showError(error.error.errorMessage, '');
       })
+    
   }
   handlePage(number) {
     if(number!=1)
@@ -275,8 +289,10 @@ export class TestListComponent implements OnInit {
          let data ={
             "category_id":id
           }
+          that.loader=true;
           that.service.deleteCategory(data).subscribe(
             response => {
+              that.loader=true;
               if (response.code == 200) {
                 that.notifyService.showSuccess(response.message, '');
                 that.getSubCategory();
@@ -286,6 +302,7 @@ export class TestListComponent implements OnInit {
               }
             },
             error => {
+              that.loader=false;
               that.notifyService.showError(error.error.errorMessage, '');
             }
           )
