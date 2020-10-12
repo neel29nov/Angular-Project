@@ -1,56 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { CreatePostComponent } from '../create-post/create-post.component';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, OnInit,Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MainModulesComponent } from '../main-modules/main-modules.component';
 import { AuthService } from '../home.service';
 import { NotificationService } from '../../shared/toastr-notification/notification.service';
 import { Router } from '@angular/router';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class CreatePostComponent implements OnInit {
 
   constructor(
-    public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any,
+    public dialogRef: MatDialogRef<DashboardComponent>,
     private notifyService : NotificationService,
     private router: Router,
     private service: AuthService
   ) { }
   feedText= '';
-  image:any;
-  feedList: any;
+image:any;
   ngOnInit(): void {
-    this.getFeedList();
-  }
-  getFeedList(){
-    this.service.feedList({}).subscribe(
-      response => {
-        this.loader=false;
-        if (response.code == 200) {
-          this.feedList = response.data.lists.data;
-          this.notifyService.showSuccess(response.message, '');
-        }
-        else {
-          this.notifyService.showError(response.message, '');
-        }
-      },
-      error => {
-        this.loader=false;
-        this.notifyService.showError(error.error.message, '')
-      })
-  }
-  OpenPostDialog(){
-    let dialogRef = this.dialog.open(CreatePostComponent, {
-      data: {
-      },
-      width: '680px',
-      disableClose: true
-    });
-    dialogRef.afterClosed().subscribe(res =>{
-      // this.getmodules();
-    })
   }
   loader = false;
   showEmojiPicker = false;
@@ -80,7 +52,9 @@ export class DashboardComponent implements OnInit {
     
     // this.showEmojiPicker = false;
   }
-  
+  close(){
+    this.dialogRef.close();
+  }
   loadFile(fileInput: any) {
       this.image = fileInput.target.files[0];
   }
@@ -94,6 +68,7 @@ export class DashboardComponent implements OnInit {
         this.loader=false;
         if (response.code == 200) {
           this.notifyService.showSuccess(response.message, '');
+          this.dialogRef.close();
         }
         else {
           this.notifyService.showError(response.message, '');
@@ -104,5 +79,4 @@ export class DashboardComponent implements OnInit {
         this.notifyService.showError(error.error.message, '')
       })
   }
-
 }

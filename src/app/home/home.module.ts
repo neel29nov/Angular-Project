@@ -24,10 +24,11 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-
+import { CreatePostComponent } from './create-post/create-post.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 @NgModule({
-  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent, TestListComponent, QuestionsListComponent],
+  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent, TestListComponent, QuestionsListComponent, CreatePostComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,
@@ -43,11 +44,12 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatAutocompleteModule,
     CKEditorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PickerModule
   ],
   exports:[
     
   ],
-  entryComponents: [AddModuleComponent,AddCategoryComponent,AddSubcategoryComponent]
+  entryComponents: [AddModuleComponent,AddCategoryComponent,AddSubcategoryComponent,CreatePostComponent]
 })
 export class HomeModule { }

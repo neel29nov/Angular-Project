@@ -106,8 +106,8 @@ export class AddQuestionComponent implements OnInit {
     
     this.service.addQuestion(formData).subscribe(
       response => {
-        if (response.statusCode == 200) {
-          this.notifyService.showSuccess(response.errorMessage, '');
+        if (response.code == 200) {
+          this.notifyService.showSuccess(response.message, '');
           this.router.navigate(['/Home/question-list'],{queryParams: {ExamId: this.ExamId}});
         }
         else {

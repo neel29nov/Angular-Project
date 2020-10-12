@@ -20,5 +20,12 @@ export const apiUrl = {
     questionListUrl: 'api/quesAnsList',
     addQuestionUrl: 'api/quesAnsCreate',
     getTestDetailUrl: 'api/examDetails',
-    updateTestUrl: 'api/examEdit'
+    updateTestUrl: 'api/examEdit',
+    feedCreateUrl: 'api/feedsCreate',
+    feedDeleteUrl: 'api/feedsDelete',
+    feedEditUrl: 'api/feedsEdit',
+    feedListUrl: 'api/feedsList',
+    feedShareDeleteUrl: 'api/feedsShareDelete',
+    feedShareUrl: 'api/feedsShare',
+    feedLikeUrl: 'api/feedsLike'
 }

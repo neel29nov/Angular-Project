@@ -1,0 +1,30 @@
+<div class="content-side right-sidebar col-lg-7 col-md-12 col-sm-12">
+    <div class="create-post">
+        <div class="row">
+            <div class="col-md-7 col-sm-7">
+          <div class="form-group">
+            <img src="images\users\user-1.jpg" alt="" class="profile-photo-md">
+            <textarea name="texts" [(ngModel)]="feedText" id="exampleTextarea" cols="30" rows="10" class="form-control" placeholder="Write what you wish"></textarea>
+            
+          </div>
+        </div>
+            <div class="col-md-5 col-sm-5">
+          <div class="tools">
+            <ul class="publishing-tools list-inline">
+                <li>
+                    <button (click) ="toggleEmojiPicker()"> 😀</button><br>
+            <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" 
+            (emojiSelect)="addEmoji($event)" title="Pick your emoji…"></emoji-mart>
+                </li>
+              <li><a href="javascript:void(0)"><i class="fa fa-image" (click)="uploader.click()"></i></a></li>
+              <li><a href="javascript:void(0)"><i class="fa fa-video-camera"></i></a></li>
+            </ul>
+            <button class="btn btn-primary pull-right" (click)="createPost()">Publish</button>
+            <button class="btn pull-right" (click)="close()">Cancel</button>
+          </div>
+        </div>
+        </div>
+        <input hidden #uploader type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event)">
+    </div>
+    </div>
+    <div *ngIf="loader" class="screen_loader loader" id="screenLoader"></div>

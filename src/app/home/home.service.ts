@@ -62,4 +62,25 @@ export class AuthService {
   updateTest(data){
     return this.httpClient.post<any>(apiUrl.updateTestUrl, data);
   }
+  feedCreate(data){
+    return this.httpClient.post<any>(apiUrl.feedCreateUrl, data);
+  }
+  feedDelete(data){
+    return this.httpClient.post<any>(apiUrl.feedDeleteUrl, data);
+  }
+  feedEdit(data){
+    return this.httpClient.post<any>(apiUrl.feedEditUrl, data);
+  }
+  feedList(data){
+    return this.httpClient.post<any>(apiUrl.feedListUrl, data);
+  }
+  feedShareDelete(data){
+    return this.httpClient.post<any>(apiUrl.feedShareDeleteUrl, data);
+  }
+  feedShare(data){
+    return this.httpClient.post<any>(apiUrl.feedShareUrl, data);
+  }
+  feedLike(data){
+    return this.httpClient.post<any>(apiUrl.feedLikeUrl, data);
+  }
 }
