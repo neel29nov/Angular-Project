@@ -83,4 +83,19 @@ export class AuthService {
   feedLike(data){
     return this.httpClient.post<any>(apiUrl.feedLikeUrl, data);
   }
+  commentCreate(data){
+    return this.httpClient.post<any>(apiUrl.commentCreateUrl, data);
+  }
+  commentDelete(data){
+    return this.httpClient.post<any>(apiUrl.commentDeleteUrl, data);
+  }
+  commentEdit(data){
+    return this.httpClient.post<any>(apiUrl.commentEditUrl, data);
+  }
+  commentLike(data){
+    return this.httpClient.post<any>(apiUrl.commentLikeUrl, data);
+  }
+  commentList(data){
+    return this.httpClient.post<any>(apiUrl.commentListUrl, data);
+  }
 }

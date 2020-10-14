@@ -27,5 +27,10 @@ export const apiUrl = {
     feedListUrl: 'api/feedsList',
     feedShareDeleteUrl: 'api/feedsShareDelete',
     feedShareUrl: 'api/feedsShare',
-    feedLikeUrl: 'api/feedsLike'
+    feedLikeUrl: 'api/feedsLike',
+    commentDeleteUrl: 'api/commentsDelete',
+    commentEditUrl: 'api/commentsEdit',
+    commentListUrl: 'api/commentsList',
+    commentCreateUrl: 'api/commentsCreate',
+    commentLikeUrl: 'api/commentsLike' 
 }

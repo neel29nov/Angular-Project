@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../home.service';
 import { NotificationService } from '../../shared/toastr-notification/notification.service';
 import { Router } from '@angular/router';
+import { apiUrl } from '../../shared/api.config';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,13 +25,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getFeedList();
   }
+  globalBaseUrl = apiUrl.baseImageUrl;
   getFeedList(){
     this.service.feedList({}).subscribe(
       response => {
         this.loader=false;
         if (response.code == 200) {
           this.feedList = response.data.lists.data;
-          this.notifyService.showSuccess(response.message, '');
+          // this.notifyService.showSuccess(response.message, '');
         }
         else {
           this.notifyService.showError(response.message, '');
@@ -83,6 +85,7 @@ export class DashboardComponent implements OnInit {
   
   loadFile(fileInput: any) {
       this.image = fileInput.target.files[0];
+      this.OpenPostDialog();
   }
   createPost(){
     var formData: any = new FormData();
@@ -93,7 +96,8 @@ export class DashboardComponent implements OnInit {
       response => {
         this.loader=false;
         if (response.code == 200) {
-          this.notifyService.showSuccess(response.message, '');
+          this.getFeedList();
+          // this.notifyService.showSuccess(response.message, '');
         }
         else {
           this.notifyService.showError(response.message, '');
@@ -103,6 +107,82 @@ export class DashboardComponent implements OnInit {
         this.loader=false;
         this.notifyService.showError(error.error.message, '')
       })
+  }
+  addComment(index,obj)
+  {
+    var comment = <any>document.getElementsByClassName("commentText")[index];
+    let data ={
+      "feed_id":obj.feed_id,
+     "text":comment.value
+    };
+    this.service.commentCreate(data).subscribe(
+      response => {
+        this.loader=false;
+        if (response.code == 200) {
+          // this.notifyService.showSuccess(response.message, '');
+          this.getFeedList();
+        }
+        else {
+          this.notifyService.showError(response.message, '');
+        }
+      },
+      error => {
+        this.loader=false;
+        this.notifyService.showError(error.error.message, '')
+      })
+  }
+  LikeFeed(item,isLike){
+    let data = {
+      "feed_id":item.feed_id,
+      "user_id":localStorage.getItem("UserId"),
+      "status":isLike
+    }
+    this.service.feedLike(data).subscribe(
+      response => {
+        this.loader=false;
+        if (response.code == 200) {
+          // this.notifyService.showSuccess(response.message, '');
+          this.getFeedList();
+        }
+        else {
+          this.notifyService.showError(response.message, '');
+        }
+      },
+      error => {
+        this.loader=false;
+        this.notifyService.showError(error.error.message, '')
+      })
+  }
+  getTimeData(time)
+  {
+    let date = new Date(time);
+    let currentDate = new Date;
+    if(currentDate.getDate()-date.getDate() == 0)
+    {
+      if(currentDate.getHours()-date.getHours() == 0){
+        if(currentDate.getMinutes()-date.getMinutes() == 0){
+          return  "1 Minute"
+        }
+        else if(currentDate.getMinutes()-date.getMinutes() == 1){
+          return  "1 Minute"
+        }
+        else{
+          return currentDate.getMinutes()-date.getMinutes() + "Minutes"
+        }
+      }
+      else if(currentDate.getHours()-date.getHours() == 1){
+        return "1 Hour"
+      }
+      else{
+        return currentDate.getHours()-date.getHours() + "Hours"
+      }
+    }
+    else if(currentDate.getDate()-date.getDate() == 1){
+      return "1 Day"
+    }
+    else{
+      return currentDate.getDate()-date.getDate() +  "Days"
+    }
   }
 
 }

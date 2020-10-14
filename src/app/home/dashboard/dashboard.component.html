@@ -223,6 +223,7 @@
 							<div class="col-md-5 col-sm-5">
 						  <div class="tools">
 							<ul class="publishing-tools list-inline">
+								<li><a href="javascript:void(0)"><i class="fa fa-edit" (click)="OpenPostDialog()"></i></a></li>
 								<li>
 									<button (click) ="toggleEmojiPicker()"> 😀</button><br>
 							<emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" 
@@ -238,41 +239,39 @@
 						<input hidden #uploader type="file" accept=".jpg,.png,.jpeg" id="myFile" name="filename" (change)="loadFile($event)">
 					</div>
 					
-					<div class="post-content" *ngFor="let item of feedList">
+					<div class="post-content" *ngFor="let item of feedList; let i = index">
 						<div class="video-wrapper">
-							<img src="http://smegroup.org/client/adminBook/{{item.image}}" alt="user">
+							<img *ngIf="item.feed_image!=null" src="{{globalBaseUrl+item.feed_image}}" alt="user">
 					  </div>
 					<div class="post-container">
-						<img src="" alt="user" class="profile-photo-md pull-left">
+						<img *ngIf="item.profile_image==null" src="{{globalBaseUrl+item.default_profile_image}}" alt="user" class="profile-photo-md pull-left">
+						<img *ngIf="item.profile_image!=null" src="{{globalBaseUrl+item.profile_image}}" alt="user" class="profile-photo-md pull-left">
 						<div class="post-detail">
 						<div class="user-info">
-							<h5><a href="timeline.html" class="profile-link">Sophia Lee</a> <span class="following">following</span></h5>
-							<p class="text-muted">Updated her status about 33 mins ago</p>
+							<h5><a href="timeline.html" class="profile-link">{{item.username}}</a></h5>
+							<p class="text-muted">Updated her status about {{getTimeData(item.CreateOn_date)}} ago</p>
 						</div>
 						<div class="reaction">
-							<a class="btn text-green"><i class="fa fa-thumbs-up"></i> 75</a>
-							<a class="btn text-red"><i class="fa fa-thumbs-down"></i> 8</a>
+							<a class="btn text-green">
+								<i *ngIf="!item.is_current_user_like" class="fa fa-thumbs-up" (click)="LikeFeed(item,1)"></i>
+								<i *ngIf="item.is_current_user_like" style="color: blue;" (click)="LikeFeed(item,0)" class="fa fa-thumbs-up"></i> 
+								{{item.feed_like_count}}</a>
 						</div>
 						<div class="line-divider"></div>
 						<div class="post-text">
 							<p>{{item.text}}</p>
 						</div>
 						<div class="line-divider"></div>
-						<div class="post-comment">
-							<img src="images\users\user-14.jpg" alt="" class="profile-photo-sm">
-							<p><a href="timeline.html" class="profile-link">Olivia </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <i class="em em-anguished"></i> Ut enim ad minim veniam, quis nostrud </p>
+						<div class="post-comment" *ngFor="let commentItem of item.comment; let i = index">
+							<img *ngIf="commentItem.user[0].image==null" src="{{globalBaseUrl+item.default_profile_image}}" alt="user" class="profile-photo-md pull-left">
+							<img *ngIf="commentItem.user[0].image!=null" src="{{globalBaseUrl+commentItem.user[0].image}}" alt="user" class="profile-photo-md pull-left">
+							<p><a href="timeline.html" class="profile-link">{{commentItem.user[0].name}} </a>{{commentItem.text}} </p>
 						</div>
 						<div class="post-comment">
+						<form method="post" #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && addComment(i,item)">
 							<img src="images\users\user-1.jpg" alt="" class="profile-photo-sm">
-							<p><a href="timeline.html" class="profile-link">Sarah</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-						</div>
-						<div class="post-comment">
-							<img src="images\users\user-2.jpg" alt="" class="profile-photo-sm">
-							<p><a href="timeline.html" class="profile-link">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-						</div>
-						<div class="post-comment">
-							<img src="images\users\user-1.jpg" alt="" class="profile-photo-sm">
-							<input type="text" class="form-control" placeholder="Post a comment">
+							<input type="text" class="form-control commentText" placeholder="Post a comment">
+						</form>
 						</div>
 						</div>
 					</div>
