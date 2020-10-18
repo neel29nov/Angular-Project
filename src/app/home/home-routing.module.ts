@@ -8,6 +8,7 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import { AddQuestionComponent } from './add-question/add-question.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
+import { ViewPostComponent } from './view-post/view-post.component';
 
 const routes: Routes = [
   {path: '', component : DashboardComponent},
@@ -18,7 +19,9 @@ const routes: Routes = [
   {path: 'create-test', component : CreateTestComponent},
   {path: 'add-question', component : AddQuestionComponent},
   {path: 'test-list', component : TestListComponent},
-  {path: 'question-list', component : QuestionsListComponent}
+  {path: 'question-list', component : QuestionsListComponent},
+  {path: 'view-post', component : ViewPostComponent}
+
 ];
 
 @NgModule({
