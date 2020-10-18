@@ -6,7 +6,7 @@
 				
 				<!-- Sidebar Side -->
                 <div class="sidebar-side left-sidebar col-lg-3 col-md-12 col-sm-12">
-                	<aside class="sidebar sticky-top">
+                	<aside class="sidebar sticky-top scrollbar-lady-lips thin">
 						
 						<!-- Tags Widget -->
                         <div class="sidebar-widget tags-widget">
@@ -240,6 +240,16 @@
 					</div>
 					
 					<div class="post-content" *ngFor="let item of feedList; let i = index">
+						<div class="dots-menu btn-group">
+							<a data-toggle="dropdown"> <span class="glyphicon glyphicon-option-vertical"> </span></a>
+						   
+							<ul class="dropdown-menu">
+							  <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+							  <li class="delete-row">
+								<a href="" data-toggle="modal" data-target="#alert-modal"><i class="fa fa-trash-o"></i> Delete</a>
+							  </li>
+							</ul>
+						  </div>
 						<div class="video-wrapper">
 							<img *ngIf="item.feed_image!=null" src="{{globalBaseUrl+item.feed_image}}" alt="user">
 					  </div>
@@ -248,7 +258,7 @@
 						<img *ngIf="item.profile_image!=null" src="{{globalBaseUrl+item.profile_image}}" alt="user" class="profile-photo-md pull-left">
 						<div class="post-detail">
 						<div class="user-info">
-							<h5><a href="timeline.html" class="profile-link">{{item.username}}</a></h5>
+							<h4><a href="timeline.html" class="profile-link">{{item.username}}</a></h4>
 							<p class="text-muted">Updated her status about {{getTimeData(item.CreateOn_date)}} ago</p>
 						</div>
 						<div class="reaction">
@@ -262,17 +272,18 @@
 							<p>{{item.text}}</p>
 						</div>
 						<div class="line-divider"></div>
+						<div class="post-comment">
+							<form method="post" #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && addComment(i,item)">
+								<img src="images\users\user-1.jpg" alt="" class="profile-photo-sm">
+								<input type="text" class="form-control commentText" placeholder="Post a comment">
+							</form>
+						</div>
 						<div class="post-comment" *ngFor="let commentItem of item.comment; let i = index">
 							<img *ngIf="commentItem.user[0].image==null" src="{{globalBaseUrl+item.default_profile_image}}" alt="user" class="profile-photo-md pull-left">
 							<img *ngIf="commentItem.user[0].image!=null" src="{{globalBaseUrl+commentItem.user[0].image}}" alt="user" class="profile-photo-md pull-left">
 							<p><a href="timeline.html" class="profile-link">{{commentItem.user[0].name}} </a>{{commentItem.text}} </p>
 						</div>
-						<div class="post-comment">
-						<form method="post" #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && addComment(i,item)">
-							<img src="images\users\user-1.jpg" alt="" class="profile-photo-sm">
-							<input type="text" class="form-control commentText" placeholder="Post a comment">
-						</form>
-						</div>
+						
 						</div>
 					</div>
 					</div>
