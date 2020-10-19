@@ -105,7 +105,8 @@ export class HeaderComponent implements OnInit {
       });
       $.getScript( 'assets/js/jquery.js', function( data, textStatus, jqxhr ) {      
       });
-      
+      $.getScript( 'assets/js/script.js', function( data, textStatus, jqxhr ) {      
+      });
     }
     
   }

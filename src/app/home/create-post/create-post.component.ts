@@ -22,7 +22,28 @@ export class CreatePostComponent implements OnInit {
   ) { }
   feedText= '';
 image:any;
+feedId=0
   ngOnInit(): void {
+    if(this.dialogData.text)
+    {
+      this.feedText = this.dialogData.text;
+    }
+    
+    if(this.dialogData.feed_id){
+      this.feedId = this.dialogData.feed_id;
+      if(this.dialogData.img)
+      {
+        var imgtag = <any>document.getElementById("UploadImg");
+        imgtag.src = this.dialogData.img;
+        this.image = this.dialogData.img;
+      }
+    }
+    else{
+      if(this.dialogData.img)
+      {
+        this.loadFile(this.dialogData.img)
+      }
+    }
   }
   loader = false;
   showEmojiPicker = false;
@@ -57,26 +78,62 @@ image:any;
   }
   loadFile(fileInput: any) {
       this.image = fileInput.target.files[0];
+      var selectedFile = this.image
+      var reader = new FileReader();
+
+      var imgtag = <any>document.getElementById("UploadImg");
+      imgtag.title = selectedFile.name;
+
+      reader.onload = function(event) {
+        imgtag.src = event.target.result;
+      };
+       reader.readAsDataURL(selectedFile);
   }
   createPost(){
-    var formData: any = new FormData();
-    formData.append('text', this.feedText)
-    formData.append('image', this.image);
-    this.loader=true;
-    this.service.feedCreate(formData).subscribe(
-      response => {
-        this.loader=false;
-        if (response.code == 200) {
-          this.notifyService.showSuccess(response.message, '');
-          this.dialogRef.close();
-        }
-        else {
-          this.notifyService.showError(response.message, '');
-        }
-      },
-      error => {
-        this.loader=false;
-        this.notifyService.showError(error.error.message, '')
-      })
+    if(this.feedId)
+    {
+      var formData: any = new FormData();
+      formData.append('text', this.feedText)
+      formData.append('image', this.image);
+      formData.append('feed_id', this.feedId);
+      this.loader=true;
+      this.service.feedEdit(formData).subscribe(
+        response => {
+          this.loader=false;
+          if (response.code == 200) {
+            this.notifyService.showSuccess(response.message, '');
+            this.dialogRef.close();
+          }
+          else {
+            this.notifyService.showError(response.message, '');
+          }
+        },
+        error => {
+          this.loader=false;
+          this.notifyService.showError(error.error.message, '')
+        })
+    }
+    else{
+      var formData: any = new FormData();
+      formData.append('text', this.feedText)
+      formData.append('image', this.image);
+      this.loader=true;
+      this.service.feedCreate(formData).subscribe(
+        response => {
+          this.loader=false;
+          if (response.code == 200) {
+            this.notifyService.showSuccess(response.message, '');
+            this.dialogRef.close();
+          }
+          else {
+            this.notifyService.showError(response.message, '');
+          }
+        },
+        error => {
+          this.loader=false;
+          this.notifyService.showError(error.error.message, '')
+        })
+    }
+    
   }
 }

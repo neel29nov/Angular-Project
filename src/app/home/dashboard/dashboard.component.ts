@@ -5,6 +5,7 @@ import { AuthService } from '../home.service';
 import { NotificationService } from '../../shared/toastr-notification/notification.service';
 import { Router } from '@angular/router';
 import { apiUrl } from '../../shared/api.config';
+declare var bootbox: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
   feedText= '';
   image:any;
   feedList: any;
+  fileInputImg:any;
   ngOnInit(): void {
     this.getFeedList();
   }
@@ -43,15 +45,18 @@ export class DashboardComponent implements OnInit {
         this.notifyService.showError(error.error.message, '')
       })
   }
-  OpenPostDialog(){
+  OpenPostDialog(feedId?,feedText?,feedImg?){
     let dialogRef = this.dialog.open(CreatePostComponent, {
       data: {
+        text:feedText?feedText:this.feedText,
+        img:feedImg?feedImg:this.fileInputImg,
+        feed_id: feedId?feedId:0
       },
       width: '680px',
       disableClose: true
     });
     dialogRef.afterClosed().subscribe(res =>{
-      // this.getmodules();
+      this.getFeedList();
     })
   }
   loader = false;
@@ -85,6 +90,7 @@ export class DashboardComponent implements OnInit {
   
   loadFile(fileInput: any) {
       this.image = fileInput.target.files[0];
+      this.fileInputImg = fileInput;
       this.OpenPostDialog();
   }
   createPost(){
@@ -132,6 +138,14 @@ export class DashboardComponent implements OnInit {
       })
   }
   LikeFeed(item,isLike){
+    item.is_current_user_like =isLike;
+    if(isLike)
+    {
+      item.feed_like_count = parseInt(item.feed_like_count) + 1;
+    }
+    else{
+      item.feed_like_count = parseInt(item.feed_like_count) - 1;
+    }
     let data = {
       "feed_id":item.feed_id,
       "user_id":localStorage.getItem("UserId"),
@@ -184,5 +198,45 @@ export class DashboardComponent implements OnInit {
       return currentDate.getDate()-date.getDate() +  "Days"
     }
   }
-
+  DeletePost(feed_id)
+  {
+    var that = this;
+    bootbox.confirm({
+      message: "Are you sure you want to delete this post?",
+      buttons: {
+        confirm: {
+          label: 'Yes',
+          className: 'btn-success'
+        },
+        cancel: {
+          label: 'No',
+          className: 'btn-danger'
+        }
+      },
+      callback: function (result) {
+        if (result) {
+          that.loader=true;
+          let data = {
+            "feed_id":feed_id
+          }
+          that.service.feedDelete(data).subscribe(
+            response => {
+              that.loader=false;
+              if (response.code == 200) {
+                that.notifyService.showSuccess(response.message, '');
+                that.getFeedList();
+              }
+              else {
+                that.notifyService.showError(response.message, '');
+              }
+            },
+            error => {
+              that.loader=false;
+              that.notifyService.showError(error.error.message, '')
+            })
+        }
+      }
+    });
+    
+  }
 }
