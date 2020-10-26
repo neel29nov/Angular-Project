@@ -98,4 +98,7 @@ export class AuthService {
   commentList(data){
     return this.httpClient.post<any>(apiUrl.commentListUrl, data);
   }
+  viewPost(data){
+    return this.httpClient.post<any>(apiUrl.viewPostUrl, data);
+  }
 }

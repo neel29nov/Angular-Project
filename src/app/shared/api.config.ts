@@ -32,5 +32,6 @@ export const apiUrl = {
     commentEditUrl: 'api/commentsEdit',
     commentListUrl: 'api/commentsList',
     commentCreateUrl: 'api/commentsCreate',
-    commentLikeUrl: 'api/commentsLike' 
+    commentLikeUrl: 'api/commentsLike',
+    viewPostUrl: 'api/viewPost'
 }

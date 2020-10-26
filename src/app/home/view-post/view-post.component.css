@@ -136,3 +136,8 @@ a{
   height: 35px;
   width: 35px;
 }
+img.profile-photo-md {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}

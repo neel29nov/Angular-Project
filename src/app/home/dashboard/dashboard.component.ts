@@ -181,21 +181,21 @@ export class DashboardComponent implements OnInit {
           return  "1 Minute"
         }
         else{
-          return currentDate.getMinutes()-date.getMinutes() + "Minutes"
+          return currentDate.getMinutes()-date.getMinutes() + " Minutes"
         }
       }
       else if(currentDate.getHours()-date.getHours() == 1){
         return "1 Hour"
       }
       else{
-        return currentDate.getHours()-date.getHours() + "Hours"
+        return currentDate.getHours()-date.getHours() + " Hours"
       }
     }
     else if(currentDate.getDate()-date.getDate() == 1){
       return "1 Day"
     }
     else{
-      return currentDate.getDate()-date.getDate() +  "Days"
+      return currentDate.getDate()-date.getDate() +  " Days"
     }
   }
   DeletePost(feed_id)
@@ -238,5 +238,8 @@ export class DashboardComponent implements OnInit {
       }
     });
     
+  }
+  viewPost(feed_id){
+    this.router.navigate(['/Home/view-post'],{queryParams: {feedId: feed_id}})
   }
 }

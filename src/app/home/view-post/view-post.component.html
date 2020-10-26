@@ -16,42 +16,39 @@
                         </ul>
                       </div>
                       <div class="video-wrapper">
-                        <img src="http://smegroup.org/client/adminBook/public/storage/feeds/5f95b1397882a.jpg" alt="post-image" class="img-responsive post-image">
+                        <img src="{{globalBaseUrl}}{{postData.feed_image}}" alt="post-image" class="img-responsive post-image">
                       </div>
                     
                       <div class="post-container">
-						<img  src="" alt="user" class="profile-photo-md pull-left">
-						<img  src="" alt="user" class="profile-photo-md pull-left">
+						<img  src="{{postData.profile_image?globalBaseUrl+postData.profile_image:globalBaseUrl+postData.default_profile_image}}" alt="user" class="profile-photo-md pull-left">
 						<div class="post-detail">
 						<div class="user-info">
-							<h4><a href="timeline.html" class="profile-link">username</a></h4>
-							<p class="text-muted">Updated her status about minute ago</p>
+							<h4><a href="timeline.html" class="profile-link">{{postData.username}}</a></h4>
+							<p class="text-muted">Updated her status about {{getTimeData(postData.CreateOn_date)}} ago</p>
 						</div>
-						<div  class="reaction" >
+						<div *ngIf="!postData.is_current_user_like" class="reaction" (click)="LikeFeed(postData,1)">
 							<a class="btn text-green">
-								<i  class="fa fa-thumbs-up" ></i>
-								1</a>
+								<i  class="fa fa-thumbs-up" ></i>{{postData.feed_like_count}}</a>
 						</div>
-						<div  class="reaction" >
+						<div *ngIf="postData.is_current_user_like" class="reaction" (click)="LikeFeed(postData,0)">
 							<a class="btn text-green">
-								<i  style="color: blue;" class="fa fa-thumbs-up"></i> 
-								1</a>
+								<i  style="color: blue;" class="fa fa-thumbs-up"></i>{{postData.feed_like_count}}</a>
 						</div>
 						<div class="line-divider"></div>
 						<div class="post-text">
-							<p>this is text</p>
+							<p>{{postData.text}}</p>
 						</div>
 						<div class="line-divider"></div>
 						<div class="post-comment">
-							<form method="post" >
+							<form method="post" #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && addComment(0,postData)">
 								<img src="images\users\user-1.jpg" alt="" class="profile-photo-sm">
 								<input type="text" class="form-control commentText" placeholder="Post a comment">
 							</form>
 						</div>
-						<div class="post-comment" >
-							<img  src="" alt="user" class="profile-photo-md pull-left">
-							<img  src="" alt="user" class="profile-photo-md pull-left">
-							<p><a href="timeline.html" class="profile-link">username </a>user text </p>
+						<div class="post-comment" *ngFor="let commentItem of commentList; let i = index">
+							<!-- <img *ngIf="commentItem.user[0].image==null" src="{{globalBaseUrl+postData.default_profile_image}}" alt="user" class="profile-photo-md pull-left">
+							<img *ngIf="commentItem.user[0].image!=null" src="{{globalBaseUrl+commentItem.user[0].image}}" alt="user" class="profile-photo-md pull-left"> -->
+							<p><a href="timeline.html" class="profile-link"> </a>{{commentItem.text}} </p>
 						</div>
 						
 						</div>
