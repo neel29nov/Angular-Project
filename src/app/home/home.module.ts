@@ -27,9 +27,10 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { ViewPostComponent } from './view-post/view-post.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent, TestListComponent, QuestionsListComponent, CreatePostComponent, ViewPostComponent],
+  declarations: [DashboardComponent, MainModulesComponent, AddModuleComponent, CategoryListComponent, AddCategoryComponent, AddSubcategoryComponent, SubcategoryListComponent, CreateTestComponent, AddQuestionComponent, TestListComponent, QuestionsListComponent, CreatePostComponent, ViewPostComponent, UserProfileComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

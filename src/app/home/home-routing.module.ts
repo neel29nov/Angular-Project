@@ -9,6 +9,7 @@ import { AddQuestionComponent } from './add-question/add-question.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { QuestionsListComponent } from './questions-list/questions-list.component';
 import { ViewPostComponent } from './view-post/view-post.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {path: '', component : DashboardComponent},
@@ -20,8 +21,8 @@ const routes: Routes = [
   {path: 'add-question', component : AddQuestionComponent},
   {path: 'test-list', component : TestListComponent},
   {path: 'question-list', component : QuestionsListComponent},
-  {path: 'view-post', component : ViewPostComponent}
-
+  {path: 'view-post', component : ViewPostComponent},
+  {path: 'user-profile', component : UserProfileComponent}
 ];
 
 @NgModule({
